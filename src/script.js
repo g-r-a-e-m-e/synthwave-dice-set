@@ -167,9 +167,9 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(90, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 1
-camera.position.y = 1
-camera.position.z = 8
+camera.position.x = 0
+camera.position.y = -1.5
+camera.position.z = 6.9
 scene.add(camera)
 
 // Controls
@@ -196,11 +196,12 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
     
     // Animate Dice
-    const rot = elapsedTime * Math.PI * 0.25
+    const rot = elapsedTime * Math.PI * 0.38
     if(d20)
     {
         d20.scene.rotation.y = rot
         d20.scene.rotation.z = rot * 0.5
+        d20.scene.position.z = Math.sin(rot) * 2
     }
     if(d4)
     {
@@ -208,7 +209,7 @@ const tick = () =>
         d4.scene.rotation.z = rot * 0.5
         d4.scene.position.y = (-Math.sin(rot) * 3) 
         d4.scene.position.x = (Math.cos(rot) * 3)
-        d4.scene.position.z = Math.sin(rot * 0.5)
+        d4.scene.position.z = Math.sin(rot * 0.9) * 2
     }
     if(d6)
     {
@@ -216,7 +217,7 @@ const tick = () =>
         d6.scene.rotation.z = rot * 0.5
         d6.scene.position.y = (-Math.sin(rot + Math.PI / 3) * 3)
         d6.scene.position.x = (Math.cos(rot + Math.PI / 3) * 3)
-        d6.scene.position.z = Math.sin(rot * 0.5)
+        d6.scene.position.z = Math.sin(rot * 1.1) * 2
     }
     if(d8)
     {
@@ -224,7 +225,7 @@ const tick = () =>
         d8.scene.rotation.z = rot * 0.5
         d8.scene.position.y = (-Math.sin(rot + Math.PI * 2 / 3) * 3)
         d8.scene.position.x = (Math.cos(rot + Math.PI * 2/ 3) * 3)
-        d8.scene.position.z = Math.sin(rot * 0.5)
+        d8.scene.position.z = Math.sin(rot * 0.78) * 2
     }
     if(d10)
     {
@@ -232,7 +233,7 @@ const tick = () =>
         d10.scene.rotation.z = rot * 0.5
         d10.scene.position.y = (-Math.sin(rot + Math.PI) * 3)
         d10.scene.position.x = (Math.cos(rot + Math.PI) * 3)
-        d10.scene.position.z = Math.sin(rot * 0.5)
+        d10.scene.position.z = Math.sin(rot * 1.337) * 2
     }
     if(d100)
     {
@@ -240,7 +241,7 @@ const tick = () =>
         d100.scene.rotation.z = rot * 0.5
         d100.scene.position.y = (-Math.sin(rot + Math.PI * 4 / 3) * 3)
         d100.scene.position.x = (Math.cos(rot + Math.PI * 4 / 3) * 3)
-        d100.scene.position.z = Math.sin(rot * 0.5)
+        d100.scene.position.z = Math.sin(rot * 0.42) * 2
     }
     if(d12)
     {
@@ -248,7 +249,7 @@ const tick = () =>
         d12.scene.rotation.z = rot * 0.5
         d12.scene.position.y = (-Math.sin(rot + Math.PI * 5 / 3) * 3)
         d12.scene.position.x = (Math.cos(rot + Math.PI * 5 / 3) * 3)
-        d12.scene.position.z = Math.sin(rot * 0.5)
+        d12.scene.position.z = Math.sin(rot * 0.8675309) * 2
     }
 
     // directionalLight.position.set(rot, 5, rot)
