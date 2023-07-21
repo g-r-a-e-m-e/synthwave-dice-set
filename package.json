@@ -1,0 +1,19 @@
+{
+  "name": "dice-set",
+  "version": "1.0.0",
+  "description": "a synthwave D20 dice set",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "author": "@g-r-a-e-m-e",
+  "devDependencies": {
+    "esbuild": "^0.18.11",
+    "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.9",
+    "gsap": "^3.12.2",
+    "three": "^0.154.0"
+  }
+}
