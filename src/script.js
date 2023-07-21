@@ -155,7 +155,7 @@ gltfLoader.load(
     {
         message = gltf
         // message.scene.position.set(-60, 30, -35)
-        message.scene.position.set(-25, 60, -50)
+        message.scene.position.set(-27, 60, -50)
         // message.scene.rotation.set(0, 0.69, -.19)
         message.scene.rotation.set(.69,0,0)
         message.scene.scale.set(10, 10, 5)
