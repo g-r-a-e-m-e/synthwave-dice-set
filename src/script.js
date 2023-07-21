@@ -2,6 +2,9 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 
 /**
  * Loaders
@@ -76,6 +79,7 @@ gltfLoader.load(
         d4 = gltf
         d4.scene.position.set(-3, 0, 0)
         scene.add(d4.scene)
+        updateAllMaterials()
     }
 )
 
@@ -88,6 +92,7 @@ gltfLoader.load(
         d6 = gltf
         d6.scene.position.set(-3, 0, 0)
         scene.add(d6.scene)
+        updateAllMaterials()
     }
 )
 
@@ -100,6 +105,7 @@ gltfLoader.load(
         d8 = gltf
         d8.scene.position.set(-3, 0, 0)
         scene.add(d8.scene)
+        updateAllMaterials()
     }
 )
 
@@ -112,6 +118,7 @@ gltfLoader.load(
         d10 = gltf
         d10.scene.position.set(-3, 0, 0)
         scene.add(d10.scene)
+        updateAllMaterials()
     }
 )
 
@@ -124,6 +131,7 @@ gltfLoader.load(
         d100 = gltf
         d100.scene.position.set(-3, 0, 0)
         scene.add(d100.scene)
+        updateAllMaterials()
     }
 )
 
@@ -136,6 +144,28 @@ gltfLoader.load(
         d12 = gltf
         d12.scene.position.set(-3, 0, 0)
         scene.add(d12.scene)
+        updateAllMaterials()
+    }
+)
+
+let message;
+gltfLoader.load(
+    '/text/message.glb',
+    (gltf) =>
+    {
+        message = gltf
+        // message.scene.position.set(-60, 30, -35)
+        message.scene.position.set(-20, 60, -50)
+        // message.scene.rotation.set(0, 0.69, -.19)
+        message.scene.rotation.set(.69,0,0)
+        message.scene.scale.set(10, 10, 5)
+        message.scene.traverse((o) => {
+            if (o.isMesh) {
+              o.material.emissive = new THREE.Color( 0x42069f )
+            }
+          });
+        scene.add(message.scene)
+        updateAllMaterials()
     }
 )
 
@@ -185,6 +215,18 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.outputColorSpace = THREE.SRGBColorSpace
+
+// Bloom effect
+const renderScene = new RenderPass(scene, camera)
+const composer = new EffectComposer(renderer)
+composer.addPass(renderScene)
+const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    0.15,
+    0.15,
+    0.15
+)
+composer.addPass(bloomPass)
 
 /**
  * Animate
@@ -257,7 +299,7 @@ const tick = () =>
     controls.update()
 
     // Render
-    renderer.render(scene, camera)
+    composer.render(scene, camera)
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
