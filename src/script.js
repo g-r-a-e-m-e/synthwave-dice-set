@@ -31,7 +31,6 @@ textureLoader.load('/environment/map.jpg', (environmentMap) =>
 {
     environmentMap.mapping = THREE.EquirectangularReflectionMapping
     environmentMap.colorSpace = THREE.SRGBColorSpace
-
     scene.background = environmentMap
     scene.environment = environmentMap
 })
@@ -62,7 +61,6 @@ gltfLoader.load(
     (gltf) =>
     {
         d20 = gltf
-        console.log(d20)
         d20.scene.position.set(0, 0, 0)
         scene.add(d20.scene)
         updateAllMaterials()
@@ -140,59 +138,6 @@ gltfLoader.load(
         scene.add(d12.scene)
     }
 )
-
-/**
- * Lights
- */
-// const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
-// scene.add(ambientLight)
-
-// const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
-// directionalLight.castShadow = true
-// directionalLight.shadow.mapSize.set(1024, 1024)
-// directionalLight.shadow.camera.far = 15
-// directionalLight.shadow.camera.left = - 7
-// directionalLight.shadow.camera.top = 7
-// directionalLight.shadow.camera.right = 7
-// directionalLight.shadow.camera.bottom = - 7
-// directionalLight.position.set(5, 5, 5)
-// scene.add(directionalLight)
-
-/**
- * Particles
- */
-// // Texture
-// const particleTexture = textureLoader.load('/particles/8.png')
-// // Geometry
-// const particlesGeometry = new THREE.BufferGeometry()
-// const particleCount = 10 ** 4
-// const positions = new Float32Array(particleCount * 3)
-// const colors = new Float32Array(particleCount * 3)
-// for(let i = 0; i < particleCount * 3; i ++)
-// {
-//     positions[i] = (Math.random() - 0.5) * 25
-//     colors[i] = Math.random() 
-// }
-// particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-// particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3)) 
-
-// // Material
-// const particlesMaterial = new THREE.PointsMaterial({
-//     size: 0.1,
-//     sizeAttenuation: true,
-//     transparent: true
-// })
-// particlesMaterial.map = particleTexture
-// particlesMaterial.alphaMap = particleTexture
-// particlesMaterial.depthTest = true
-// particlesMaterial.depthWrite = true
-// particlesMaterial.blending = THREE.AdditiveBlending
-// particlesMaterial.vertexColors = true
-
-// // Points
-// const particles = new THREE.Points(particlesGeometry, particlesMaterial)
-// scene.add(particles)
-
 
 /**
  * Sizes
